@@ -258,6 +258,14 @@ void WaveshaperBasicAudioProcessor::setFunctionToUse(std::string func)
         };
         waveshapeFunctionCurrent = "Hardclip";
     }
+    else if(func == "Atan")
+    {
+        waveshaper.functionToUse = [](float x)
+        {
+            return std::atan(x);
+        };
+        waveshapeFunctionCurrent = "Atan";
+    }
     return;
 }
 
