@@ -23,6 +23,9 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    
+    void modeMenuChanged();
+
 
 private:
     juce::Slider sliderPreGain;//Pregain slider
@@ -31,8 +34,13 @@ private:
     juce::Slider sliderPostGain;//Pregain slider
     juce::Label labelPostGain; //Pregain label
     
+    juce::Label labelWaveshapeType;
+    juce::ComboBox waveshapeType;
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPostGain;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> comboAttachmentWaveshapeType;
+
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     WaveshaperBasicAudioProcessor& audioProcessor;

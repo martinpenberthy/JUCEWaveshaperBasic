@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <string>
 
 //==============================================================================
 /**
@@ -53,13 +54,17 @@ public:
     const juce::String getProgramName (int index) override;
     void changeProgramName (int index, const juce::String& newName) override;
 
+    
+    void setFunctionToUse(std::string func);
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     
     juce::AudioProcessorValueTreeState apvts;
-
+    std::string waveshapeFunction;
+    std::string waveshapeFunctionCurrent;
+    
     //juce::SmoothedValue<float> volume {0.0f};
     float preGainVal {0.0f};
     float postGainVal {0.0f};

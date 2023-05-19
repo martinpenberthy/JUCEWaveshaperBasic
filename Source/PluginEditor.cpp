@@ -19,6 +19,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     
     addAndMakeVisible(sliderPreGain);
     addAndMakeVisible(sliderPostGain);
+    addAndMakeVisible(waveshapeType);
 
     
     sliderPreGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
@@ -56,11 +57,21 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     };
     
     
+    labelWaveshapeType.attachToComponent(&waveshapeType, false);
+    labelWaveshapeType.setColour(juce::Label::textColourId, juce::Colours::white);
+    waveshapeType.addItem("Tanh", 1);
+    waveshapeType.addItem("Hardclip", 2);
+    waveshapeType.addItem("x/abs(x)+1", 3);
+    waveshapeType.onChange = [this]{modeMenuChanged();};
+    waveshapeType.setSelectedId(1);
+
     
     
-   sliderAttachmentPreGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "PREGAIN", sliderPreGain);
+    sliderAttachmentPreGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "PREGAIN", sliderPreGain);
     
     sliderAttachmentPostGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "POSTGAIN", sliderPostGain);
+    
+    comboAttachmentWaveshapeType = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.apvts, "TYPE", waveshapeType);
     
 }
 
@@ -74,12 +85,35 @@ void WaveshaperBasicAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
     
-    sliderPreGain.setBounds(getWidth()/2 - 100, getHeight()/2 - 100, 150, 150);
-    sliderPostGain.setBounds(getWidth()/2 + 50, getHeight()/2 - 100, 150, 150);
+
 }
 
 void WaveshaperBasicAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+    sliderPreGain.setBounds(getWidth()/2 - 100, getHeight()/2 - 50, 150, 150);
+    sliderPostGain.setBounds(getWidth()/2 + 50, getHeight()/2 - 50, 150, 150);
+    waveshapeType.setBounds(getWidth()/2, getHeight() - 300, 100, 25);
 }
+
+void WaveshaperBasicAudioProcessorEditor::modeMenuChanged()
+{
+    switch (waveshapeType.getSelectedId())
+    {
+        case 1:
+            audioProcessor.waveshapeFunction = "Tanh";
+            break;
+        case 2:
+            audioProcessor.waveshapeFunction = "Hardclip";
+            break;
+        case 3:
+            audioProcessor.waveshapeFunction = "x/abs(x)+1";
+            break;
+            
+        default:
+            audioProcessor.waveshapeFunction = "Tanh";
+            break;
+    }
+}
+    

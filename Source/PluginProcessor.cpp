@@ -99,9 +99,12 @@ void WaveshaperBasicAudioProcessor::prepareToPlay (double sampleRate, int sample
     waveshaper.functionToUse = [](float x)
     {
         //return juce::jlimit(float (-0.1), float (0.1), x);
-        return std::tanh (x);
+        //return std::tanh (x);
+        return x / (std::abs(x) + 1);
         //return std::pow(x, 3.0f);
     };
+    waveshapeFunctionCurrent = "x/abs(x)+1";
+    waveshapeFunction = "x/abs(x)+1";
     
     auto &preGain = processorChain.get<preGainIndex>();
     preGain.setGainDecibels(0.0f);
@@ -124,7 +127,7 @@ void WaveshaperBasicAudioProcessor::prepareToPlay (double sampleRate, int sample
     waveShaper.prepare(spec);*/
 }
 
-void WaveshaperBasicAudioProcessor::reset() 
+void WaveshaperBasicAudioProcessor::reset()
 {
     processorChain.reset();
 }
@@ -176,6 +179,8 @@ void WaveshaperBasicAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    if(waveshapeFunction != waveshapeFunctionCurrent)
+        setFunctionToUse(waveshapeFunction);
     
     auto& preGain = processorChain.get<preGainIndex>();
     preGain.setGainDecibels(preGainVal);
@@ -219,9 +224,43 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveshaperBasicAudioProcesso
     params.add(std::make_unique<juce::AudioParameterFloat>("PREGAIN", "PreGain", -96.0f, 48.0f, 0.0f));
     params.add(std::make_unique<juce::AudioParameterFloat>("POSTGAIN", "PostGain", -96.0f, 48.0f, 0.0f));
 
-    
+    params.add(std::make_unique<juce::AudioParameterChoice>("TYPE", "Type",
+                                                            juce::StringArray {"Tanh", "Hardclip", "x/abs(x)+1"},
+                                                            1));
     return params;
 }
+
+void WaveshaperBasicAudioProcessor::setFunctionToUse(std::string func)
+{
+    auto &waveshaper = processorChain.get<waveshaperIndex>();
+    
+    if(func == "Tanh")
+    {
+        waveshaper.functionToUse = [](float x)
+        {
+            return std::tanh (x);
+        };
+        waveshapeFunctionCurrent = "Tanh";
+    }
+    else if(func == "x/abs(x)+1")
+    {
+        waveshaper.functionToUse = [](float x)
+        {
+            return x / (std::abs(x) + 1);
+        };
+        waveshapeFunctionCurrent = "x/abs(x)+1";
+    }
+    else if(func == "Hardclip")
+    {
+        waveshaper.functionToUse = [](float x)
+        {
+            return juce::jlimit(float (-0.1), float (0.1), x);
+        };
+        waveshapeFunctionCurrent = "Hardclip";
+    }
+    return;
+}
+
 
 //==============================================================================
 // This creates new instances of the plugin..
