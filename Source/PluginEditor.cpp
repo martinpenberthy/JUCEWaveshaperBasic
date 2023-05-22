@@ -62,6 +62,8 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     waveshapeType.addItem("Tanh", 1);
     waveshapeType.addItem("Hardclip", 2);
     waveshapeType.addItem("x/abs(x)+1", 3);
+    waveshapeType.addItem("Atan", 4);
+    waveshapeType.addItem("HalfRect", 5);
     waveshapeType.onChange = [this]{modeMenuChanged();};
     waveshapeType.setSelectedId(1);
 
@@ -110,7 +112,12 @@ void WaveshaperBasicAudioProcessorEditor::modeMenuChanged()
         case 3:
             audioProcessor.waveshapeFunction = "x/abs(x)+1";
             break;
-            
+        case 4:
+            audioProcessor.waveshapeFunction = "Atan";
+            break;
+        case 5:
+            audioProcessor.waveshapeFunction = "HalfRect";
+            break;
         default:
             audioProcessor.waveshapeFunction = "Tanh";
             break;
