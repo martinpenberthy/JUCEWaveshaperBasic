@@ -225,7 +225,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveshaperBasicAudioProcesso
     params.add(std::make_unique<juce::AudioParameterFloat>("POSTGAIN", "PostGain", -96.0f, 48.0f, 0.0f));
 
     params.add(std::make_unique<juce::AudioParameterChoice>("TYPE", "Type",
-                                                            juce::StringArray {"Tanh", "Hardclip", "x/abs(x)+1", "Atan"},
+                                                            juce::StringArray {"Tanh", "Hardclip", "x/abs(x)+1", "Atan", "HalfRect"},
                                                             1));
     return params;
 }
