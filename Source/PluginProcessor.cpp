@@ -225,7 +225,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveshaperBasicAudioProcesso
     params.add(std::make_unique<juce::AudioParameterFloat>("POSTGAIN", "PostGain", -96.0f, 48.0f, 0.0f));
 
     params.add(std::make_unique<juce::AudioParameterChoice>("TYPE", "Type",
-                                                            juce::StringArray {"Tanh", "Hardclip", "x/abs(x)+1", "Atan", "HalfRect"},
+                                                            juce::StringArray {"Tanh", "Hardclip", "x/abs(x)+1", "Atan", "HalfRect",
+                                                                                "Amp1"},
                                                             1));
     return params;
 }
@@ -276,6 +277,15 @@ void WaveshaperBasicAudioProcessor::setFunctionToUse(std::string func)
                 return x;
         };
         waveshapeFunctionCurrent = "HalfRect";
+    }
+    else if(func == "Amp1")
+    {
+        waveshaper.functionToUse = [](float x)
+        {
+            float param = 0.9f;
+            return (x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
+        };
+        waveshapeFunctionCurrent = "Amp1";
     }
     return;
 }
