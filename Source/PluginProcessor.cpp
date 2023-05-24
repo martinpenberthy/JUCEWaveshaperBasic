@@ -121,7 +121,7 @@ void WaveshaperBasicAudioProcessor::prepareToPlay (double sampleRate, int sample
     
     /*juce::dsp::ProcessSpec spec;
     spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = samplesPerBlock;
+    spec.maximumBlockSize = samplesPerBlock;    
     spec.numChannels = getTotalNumOutputChannels();
     
     waveShaper.prepare(spec);*/
