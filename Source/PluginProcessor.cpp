@@ -221,11 +221,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveshaperBasicAudioProcesso
 {
     juce::AudioProcessorValueTreeState::ParameterLayout params;
     
-    params.add(std::make_unique<juce::AudioParameterFloat>("PREGAIN", "PreGain", -96.0f, 48.0f, 0.0f));
-    params.add(std::make_unique<juce::AudioParameterFloat>("POSTGAIN", "PostGain", -96.0f, 48.0f, 0.0f));
+    params.add(std::make_unique<juce::AudioParameterFloat>("PREGAIN", "PreGain", 0.0f, 48.0f, 0.0f));
+    params.add(std::make_unique<juce::AudioParameterFloat>("POSTGAIN", "PostGain", -48.0f, 6.0f, 0.0f));
 
     params.add(std::make_unique<juce::AudioParameterChoice>("TYPE", "Type",
-                                                            juce::StringArray {"Tanh", "Hardclip", "x/abs(x)+1", "Atan", "HalfRect",
+                                                            juce::StringArray {"Tanh", "myAmp", "x/abs(x)+1", "Atan", "HalfRect",
                                                                                 "Amp1"},
                                                             1));
     return params;
@@ -251,13 +251,14 @@ void WaveshaperBasicAudioProcessor::setFunctionToUse(std::string func)
         };
         waveshapeFunctionCurrent = "x/abs(x)+1";
     }
-    else if(func == "Hardclip")
+    else if(func == "myAmp")
     {
         waveshaper.functionToUse = [](float x)
         {
-            return juce::jlimit(float (-0.1), float (0.1), x);
+            //return juce::jlimit(float (-0.1), float (0.1), x);
+            return (x * (std::abs(x) + 0.9f)) * 1.5f / (x * x + (0.3f) * (0.1f / std::abs(x)) + 1.0f);
         };
-        waveshapeFunctionCurrent = "Hardclip";
+        waveshapeFunctionCurrent = "myAmp";
     }
     else if(func == "Atan")
     {

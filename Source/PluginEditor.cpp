@@ -15,7 +15,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (400, 250);
     
     addAndMakeVisible(sliderPreGain);
     addAndMakeVisible(sliderPostGain);
@@ -30,7 +30,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.25f));
     sliderPreGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     sliderPreGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
-    labelPreGain.attachToComponent(&sliderPreGain, false);
+    //labelPreGain.attachToComponent(&sliderPreGain, false);
     labelPreGain.setText("PreGain(dB)", juce::dontSendNotification);
     
     sliderPreGain.onValueChange = [this]()
@@ -47,7 +47,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.25f));
     sliderPostGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     sliderPostGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
-    labelPostGain.attachToComponent(&sliderPostGain, false);
+    //labelPostGain.attachToComponent(&sliderPostGain, false);
     labelPostGain.setText("PostGain(dB)", juce::dontSendNotification);
     
     sliderPostGain.onValueChange = [this]()
@@ -60,7 +60,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     labelWaveshapeType.attachToComponent(&waveshapeType, false);
     labelWaveshapeType.setColour(juce::Label::textColourId, juce::Colours::white);
     waveshapeType.addItem("Tanh", 1);
-    waveshapeType.addItem("Hardclip", 2);
+    waveshapeType.addItem("myAmp", 2);
     waveshapeType.addItem("x/abs(x)+1", 3);
     waveshapeType.addItem("Atan", 4);
     waveshapeType.addItem("HalfRect", 5);
@@ -86,7 +86,7 @@ WaveshaperBasicAudioProcessorEditor::~WaveshaperBasicAudioProcessorEditor()
 void WaveshaperBasicAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll (juce::Colour::fromRGB(15, 16, 59));
     
 
 }
@@ -95,9 +95,17 @@ void WaveshaperBasicAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
-    sliderPreGain.setBounds(getWidth()/2 - 100, getHeight()/2 - 50, 150, 150);
-    sliderPostGain.setBounds(getWidth()/2 + 50, getHeight()/2 - 50, 150, 150);
-    waveshapeType.setBounds(getWidth()/2, getHeight() - 300, 100, 25);
+    int knobSize = 150;
+    int width = getWidth();
+    
+    sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
+    labelPreGain.setBounds(sliderPreGain.getX(), sliderPreGain.getY() - knobSize, 75, 25);
+    
+    sliderPostGain.setBounds(((width / 3) * 2) - 20, (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
+    labelPostGain.setBounds(sliderPostGain.getX(), sliderPostGain.getY() - knobSize, 75, 25);
+
+    
+    waveshapeType.setBounds((getWidth()/2) - 50, 20, 100, 25);
 }
 
 void WaveshaperBasicAudioProcessorEditor::modeMenuChanged()
@@ -108,7 +116,7 @@ void WaveshaperBasicAudioProcessorEditor::modeMenuChanged()
             audioProcessor.waveshapeFunction = "Tanh";
             break;
         case 2:
-            audioProcessor.waveshapeFunction = "Hardclip";
+            audioProcessor.waveshapeFunction = "myAmp";
             break;
         case 3:
             audioProcessor.waveshapeFunction = "x/abs(x)+1";
