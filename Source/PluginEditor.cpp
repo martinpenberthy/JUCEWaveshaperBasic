@@ -18,7 +18,11 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     setSize (400, 250);
     
     addAndMakeVisible(sliderPreGain);
+    addAndMakeVisible(labelPreGain);
+    
     addAndMakeVisible(sliderPostGain);
+    addAndMakeVisible(labelPostGain);
+    
     addAndMakeVisible(waveshapeType);
 
     
@@ -99,10 +103,10 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     int width = getWidth();
     
     sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
-    labelPreGain.setBounds(sliderPreGain.getX(), sliderPreGain.getY() - knobSize, 75, 25);
+    labelPreGain.setBounds(sliderPreGain.getX() + 20, sliderPreGain.getY() - 10, 100, 25);
     
     sliderPostGain.setBounds(((width / 3) * 2) - 20, (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
-    labelPostGain.setBounds(sliderPostGain.getX(), sliderPostGain.getY() - knobSize, 75, 25);
+    labelPostGain.setBounds(sliderPostGain.getX() + 20, sliderPostGain.getY() - 10, 100, 25);
 
     
     waveshapeType.setBounds((getWidth()/2) - 50, 20, 100, 25);
