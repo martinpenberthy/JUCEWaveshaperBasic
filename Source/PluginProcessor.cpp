@@ -27,6 +27,7 @@ WaveshaperBasicAudioProcessor::WaveshaperBasicAudioProcessor()
 
 WaveshaperBasicAudioProcessor::~WaveshaperBasicAudioProcessor()
 {
+    apvts.state.removeListener(this);
 }
 
 //==============================================================================
@@ -94,7 +95,7 @@ void WaveshaperBasicAudioProcessor::changeProgramName (int index, const juce::St
 //==============================================================================
 void WaveshaperBasicAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    auto &waveshaper = processorChain.get<waveshaperIndex>();
+    /*auto &waveshaper = processorChain.get<waveshaperIndex>();
     
     waveshaper.functionToUse = [](float x)
     {
@@ -103,14 +104,41 @@ void WaveshaperBasicAudioProcessor::prepareToPlay (double sampleRate, int sample
         return x / (std::abs(x) + 1);
         //return std::pow(x, 3.0f);
     };
-    waveshapeFunctionCurrent = "x/abs(x)+1";
-    waveshapeFunction = "x/abs(x)+1";
+    //waveshapeFunctionCurrent = "x/abs(x)+1";
+    //waveshapeFunction = "x/abs(x)+1";
+    */
+    auto waveshapeInitFunction = apvts.getRawParameterValue("TYPE");
+    
+    switch((int)*waveshapeInitFunction)
+    {
+        case 1:
+            waveshapeFunction = "Tanh";
+            break;
+        case 2:
+            waveshapeFunction = "x/abs(x)+1";
+            break;
+        case 3:
+            waveshapeFunction =  "myAmp";
+            break;
+        case 4:
+            waveshapeFunction =  "Atan";
+            break;
+        case 5:
+            waveshapeFunction =  "HalfRect";
+            break;
+        case 6:
+            waveshapeFunction =  "Amp1";
+            break;
+        default:
+            waveshapeFunction =  "Amp1";
+            break;
+    }
     
     auto &preGain = processorChain.get<preGainIndex>();
-    preGain.setGainDecibels(0.0f);
+    preGain.setGainDecibels(*apvts.getRawParameterValue("PREGAIN"));
     
     auto &postGain = processorChain.get<postGainIndex>();
-    postGain.setGainDecibels(0.0f);
+    postGain.setGainDecibels(*apvts.getRawParameterValue("POSTGAIN"));
     
     juce::dsp::ProcessSpec spec;
     spec.sampleRate = sampleRate;
@@ -118,13 +146,7 @@ void WaveshaperBasicAudioProcessor::prepareToPlay (double sampleRate, int sample
     spec.numChannels = getTotalNumOutputChannels();
     
     processorChain.prepare(spec);
-    
-    /*juce::dsp::ProcessSpec spec;
-    spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = samplesPerBlock;    
-    spec.numChannels = getTotalNumOutputChannels();
-    
-    waveShaper.prepare(spec);*/
+
 }
 
 void WaveshaperBasicAudioProcessor::reset()
@@ -183,10 +205,19 @@ void WaveshaperBasicAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
         setFunctionToUse(waveshapeFunction);
     
     auto& preGain = processorChain.get<preGainIndex>();
-    preGain.setGainDecibels(preGainVal);
+    auto& newPreGain = *apvts.getRawParameterValue("PREGAIN");
+    auto curPreGain = preGain.getGainDecibels();
     
+    if(newPreGain != curPreGain)
+        preGain.setGainDecibels(newPreGain);
+
     auto& postGain = processorChain.get<postGainIndex>();
-    postGain.setGainDecibels(postGainVal);
+    auto& newPostGain = *apvts.getRawParameterValue("POSTGAIN");
+    auto curPostGain = postGain.getGainDecibels();
+    
+    if(newPostGain != curPostGain)
+        postGain.setGainDecibels(newPostGain);
+    
     
     juce::dsp::AudioBlock<float> block (buffer);
     processorChain.process(juce::dsp::ProcessContextReplacing<float>(block));

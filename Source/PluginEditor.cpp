@@ -37,11 +37,11 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     //labelPreGain.attachToComponent(&sliderPreGain, false);
     labelPreGain.setText("PreGain(dB)", juce::dontSendNotification);
     
-    sliderPreGain.onValueChange = [this]()
+   /* sliderPreGain.onValueChange = [this]()
     {
         //audioProcessor.volume.setTargetValue(sliderGain.getValue());
         audioProcessor.preGainVal = sliderPreGain.getValue();
-    };
+    };*/
     
     sliderPostGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
@@ -54,11 +54,11 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     //labelPostGain.attachToComponent(&sliderPostGain, false);
     labelPostGain.setText("PostGain(dB)", juce::dontSendNotification);
     
-    sliderPostGain.onValueChange = [this]()
+    /*sliderPostGain.onValueChange = [this]()
     {
         //audioProcessor.volume.setTargetValue(sliderGain.getValue());
         audioProcessor.postGainVal = sliderPostGain.getValue();
-    };
+    };*/
     
     
     labelWaveshapeType.attachToComponent(&waveshapeType, false);

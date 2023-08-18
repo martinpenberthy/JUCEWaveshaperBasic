@@ -66,8 +66,8 @@ public:
     std::string waveshapeFunctionCurrent;
     
     //juce::SmoothedValue<float> volume {0.0f};
-    float preGainVal {0.0f};
-    float postGainVal {0.0f};
+    //float preGainVal {0.0f};
+    //float postGainVal {0.0f};
     
 private:
     enum
