@@ -30,8 +30,8 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPreGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
     sliderPreGain.setDoubleClickReturnValue(true, 0.0f);
     sliderPreGain.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.25f));
+    sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
+    sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
     sliderPreGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     sliderPreGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
     //labelPreGain.attachToComponent(&sliderPreGain, false);
@@ -47,8 +47,8 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
     sliderPostGain.setDoubleClickReturnValue(true, 0.0f);
     sliderPostGain.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.25f));
+    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
+    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.7   5f));
     sliderPostGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     sliderPostGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
     //labelPostGain.attachToComponent(&sliderPostGain, false);
@@ -90,9 +90,13 @@ WaveshaperBasicAudioProcessorEditor::~WaveshaperBasicAudioProcessorEditor()
 void WaveshaperBasicAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (juce::Colour::fromRGB(15, 16, 59));
-    
+    //g.fillAll (juce::Colour::fromRGB(15, 16, 59));
+    //g.fillAll(juce::Colour::fromRGB(30, 10, 70));
 
+    juce::Rectangle<int> area (0, 0, getWidth(), getHeight());
+    juce::ColourGradient bgGradient =juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::whitesmoke, getWidth(), getHeight(), false);
+    g.setGradientFill(bgGradient);
+    g.fillRect (area);
 }
 
 void WaveshaperBasicAudioProcessorEditor::resized()
@@ -103,10 +107,10 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     int width = getWidth();
     
     sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
-    labelPreGain.setBounds(sliderPreGain.getX() + 20, sliderPreGain.getY() - 10, 100, 25);
+    labelPreGain.setBounds(sliderPreGain.getX() + 30, sliderPreGain.getY() - 10, 100, 25);
     
-    sliderPostGain.setBounds(((width / 3) * 2) - 20, (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
-    labelPostGain.setBounds(sliderPostGain.getX() + 20, sliderPostGain.getY() - 10, 100, 25);
+    sliderPostGain.setBounds(((width / 3) * 2), (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
+    labelPostGain.setBounds(sliderPostGain.getX() + 30, sliderPostGain.getY() - 10, 100, 25);
 
     
     waveshapeType.setBounds((getWidth()/2) - 50, 20, 100, 25);
