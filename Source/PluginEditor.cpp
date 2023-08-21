@@ -25,17 +25,19 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     
     addAndMakeVisible(waveshapeType);
 
-    
     sliderPreGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-    sliderPreGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
+    sliderPreGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 25, 25);
     sliderPreGain.setDoubleClickReturnValue(true, 0.0f);
     sliderPreGain.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
     sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
     sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
+    sliderPreGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
+    sliderPreGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
     //labelPreGain.attachToComponent(&sliderPreGain, false);
-    labelPreGain.setText("PreGain(dB)", juce::dontSendNotification);
+
+    juce::String labelFont = juce::String("Helvetica");
+    labelPreGain.setFont(juce::Font(labelFont, 12, 0));
+    labelPreGain.setText("Pre (dB)", juce::dontSendNotification);
     
    /* sliderPreGain.onValueChange = [this]()
     {
@@ -44,15 +46,16 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     };*/
     
     sliderPostGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-    sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
+    sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 25, 25);
     sliderPostGain.setDoubleClickReturnValue(true, 0.0f);
     sliderPostGain.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
     sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.7   5f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
+    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
+    sliderPostGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
+    sliderPostGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
     //labelPostGain.attachToComponent(&sliderPostGain, false);
-    labelPostGain.setText("PostGain(dB)", juce::dontSendNotification);
+    labelPostGain.setFont(juce::Font(labelFont, 12, 0));
+    labelPostGain.setText("Post (dB)", juce::dontSendNotification);
     
     /*sliderPostGain.onValueChange = [this]()
     {
@@ -72,7 +75,6 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     waveshapeType.onChange = [this]{modeMenuChanged();};
     waveshapeType.setSelectedId(1);
 
-    
     
     sliderAttachmentPreGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "PREGAIN", sliderPreGain);
     
@@ -106,11 +108,11 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     int knobSize = 150;
     int width = getWidth();
     
-    sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
-    labelPreGain.setBounds(sliderPreGain.getX() + 30, sliderPreGain.getY() - 10, 100, 25);
+    sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
+    labelPreGain.setBounds(sliderPreGain.getX() + 35, sliderPreGain.getY() - 10, 100, 25);
     
-    sliderPostGain.setBounds(((width / 3) * 2), (getHeight() / 2) - (knobSize / 2) + 15, knobSize, knobSize);
-    labelPostGain.setBounds(sliderPostGain.getX() + 30, sliderPostGain.getY() - 10, 100, 25);
+    sliderPostGain.setBounds(((width / 3) * 2) - 15, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
+    labelPostGain.setBounds(sliderPostGain.getX() + 35, sliderPostGain.getY() - 10, 100, 25);
 
     
     waveshapeType.setBounds((getWidth()/2) - 50, 20, 100, 25);
