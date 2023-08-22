@@ -5,6 +5,7 @@
               companyName="Black Martini">
   <MAINGROUP id="eEKDuf" name="WaveshaperBasic">
     <GROUP id="{949F40A2-A7AF-07F8-D2B7-EFECF8EB68BB}" name="Source">
+      <FILE id="x7pL3A" name="myLookAndFeel.h" compile="0" resource="0" file="Source/myLookAndFeel.h"/>
       <FILE id="m9VKbB" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="waTObf" name="PluginProcessor.h" compile="0" resource="0"

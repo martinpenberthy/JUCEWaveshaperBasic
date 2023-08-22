@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "myLookAndFeel.h"
 
 //==============================================================================
 /**
@@ -28,6 +29,7 @@ public:
 
 
 private:
+    myLookAndFeel lookAndFeel; 
     juce::Slider sliderPreGain;//Pregain slider
     juce::Label labelPreGain; //Pregain label
     

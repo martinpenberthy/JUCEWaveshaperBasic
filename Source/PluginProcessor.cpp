@@ -306,8 +306,14 @@ void WaveshaperBasicAudioProcessor::setFunctionToUse(std::string func)
     {
         waveshaper.functionToUse = [](float x)
         {
-            if(x < 0.0f)
+            /*if(x < 0.0f)
                 return 0.0f;
+            else
+                return x;*/
+            if(x > 0.0f && x > 0.75f)
+                return 0.75f;
+            else if(x < 0.0f && x < -0.75f)
+                return -0.75f;
             else
                 return x;
         };

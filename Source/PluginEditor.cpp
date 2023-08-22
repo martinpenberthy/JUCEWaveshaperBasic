@@ -17,6 +17,13 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     // editor's size to whatever you need it to be.
     setSize (400, 250);
     
+    lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
+    lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
+    lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
+    lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
+    lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
+
+    
     addAndMakeVisible(sliderPreGain);
     addAndMakeVisible(labelPreGain);
     
@@ -26,42 +33,20 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     addAndMakeVisible(waveshapeType);
 
     sliderPreGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-    sliderPreGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 25, 25);
+    sliderPreGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 25);
     sliderPreGain.setDoubleClickReturnValue(true, 0.0f);
-    sliderPreGain.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
-    sliderPreGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-    //labelPreGain.attachToComponent(&sliderPreGain, false);
-
-    juce::String labelFont = juce::String("Helvetica");
-    labelPreGain.setFont(juce::Font(labelFont, 12, 0));
     labelPreGain.setText("Pre (dB)", juce::dontSendNotification);
+    sliderPreGain.setLookAndFeel(&lookAndFeel);
+    labelPreGain.setLookAndFeel(&lookAndFeel);
     
-   /* sliderPreGain.onValueChange = [this]()
-    {
-        //audioProcessor.volume.setTargetValue(sliderGain.getValue());
-        audioProcessor.preGainVal = sliderPreGain.getValue();
-    };*/
-    
+
     sliderPostGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-    sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 25, 25);
+    sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 25);
     sliderPostGain.setDoubleClickReturnValue(true, 0.0f);
-    sliderPostGain.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
-    sliderPostGain.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-    //labelPostGain.attachToComponent(&sliderPostGain, false);
-    labelPostGain.setFont(juce::Font(labelFont, 12, 0));
     labelPostGain.setText("Post (dB)", juce::dontSendNotification);
-    
-    /*sliderPostGain.onValueChange = [this]()
-    {
-        //audioProcessor.volume.setTargetValue(sliderGain.getValue());
-        audioProcessor.postGainVal = sliderPostGain.getValue();
-    };*/
+    sliderPostGain.setLookAndFeel(&lookAndFeel);
+    labelPostGain.setLookAndFeel(&lookAndFeel);
+
     
     
     labelWaveshapeType.attachToComponent(&waveshapeType, false);
@@ -74,7 +59,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     waveshapeType.addItem("Amp1", 6);
     waveshapeType.onChange = [this]{modeMenuChanged();};
     waveshapeType.setSelectedId(1);
-
+    waveshapeType.setLookAndFeel(&lookAndFeel);
     
     sliderAttachmentPreGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "PREGAIN", sliderPreGain);
     

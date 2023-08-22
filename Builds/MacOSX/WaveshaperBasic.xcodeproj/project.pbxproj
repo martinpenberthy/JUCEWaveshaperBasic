@@ -124,6 +124,7 @@
 		EFDE3529ABB51818A3216F0C /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F1E7DA37B9E823BD0005DC53 /* RecentFilesMenuTemplate.nib */ /* RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; lastKnownFileType = file.nib; name = RecentFilesMenuTemplate.nib; path = RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
 		F6E26A11C75995C5FE08565B /* include_juce_audio_plugin_client_AU_2.mm */ /* include_juce_audio_plugin_client_AU_2.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AU_2.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU_2.mm; sourceTree = SOURCE_ROOT; };
+		F8522E34187AAE7CF6F382C5 /* myLookAndFeel.h */ /* myLookAndFeel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = myLookAndFeel.h; path = ../../Source/myLookAndFeel.h; sourceTree = SOURCE_ROOT; };
 		F952EE953A3ED0E4B92CC9FB /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaveshaperBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC678D4A15786E0A7002970 /* juce_audio_formats */ /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_formats; path = /Applications/JUCE/modules/juce_audio_formats; sourceTree = "<absolute>"; };
 		FFF2F938DEEB8E35A0209EDE /* PluginProcessor.h */ /* PluginProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginProcessor.h; path = ../../Source/PluginProcessor.h; sourceTree = SOURCE_ROOT; };
@@ -234,6 +235,7 @@
 		6136520CEC09D017E51471D1 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F8522E34187AAE7CF6F382C5,
 				7403FFE3A9F4A76BD9A2D355,
 				FFF2F938DEEB8E35A0209EDE,
 				30DD33F2915E4E474B303915,
