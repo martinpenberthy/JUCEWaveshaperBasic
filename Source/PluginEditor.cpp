@@ -22,6 +22,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
+   
 
     
     addAndMakeVisible(sliderPreGain);
@@ -59,7 +60,9 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     waveshapeType.addItem("Amp1", 6);
     waveshapeType.onChange = [this]{modeMenuChanged();};
     waveshapeType.setSelectedId(1);
+    waveshapeType.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
     waveshapeType.setLookAndFeel(&lookAndFeel);
+    
     
     sliderAttachmentPreGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "PREGAIN", sliderPreGain);
     
@@ -81,7 +84,7 @@ void WaveshaperBasicAudioProcessorEditor::paint (juce::Graphics& g)
     //g.fillAll(juce::Colour::fromRGB(30, 10, 70));
 
     juce::Rectangle<int> area (0, 0, getWidth(), getHeight());
-    juce::ColourGradient bgGradient =juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::whitesmoke, getWidth(), getHeight(), false);
+    juce::ColourGradient bgGradient = juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::whitesmoke, getWidth(), getHeight(), false);
     g.setGradientFill(bgGradient);
     g.fillRect (area);
 }
@@ -94,10 +97,10 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     int width = getWidth();
     
     sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
-    labelPreGain.setBounds(sliderPreGain.getX() + 35, sliderPreGain.getY() - 10, 100, 25);
+    labelPreGain.setBounds(sliderPreGain.getX() + 50, sliderPreGain.getY() - 10, 100, 25);
     
-    sliderPostGain.setBounds(((width / 3) * 2) - 15, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
-    labelPostGain.setBounds(sliderPostGain.getX() + 35, sliderPostGain.getY() - 10, 100, 25);
+    sliderPostGain.setBounds(((width / 3) * 2) - 30, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
+    labelPostGain.setBounds(sliderPostGain.getX() + 50, sliderPostGain.getY() - 10, 100, 25);
 
     
     waveshapeType.setBounds((getWidth()/2) - 50, 20, 100, 25);
