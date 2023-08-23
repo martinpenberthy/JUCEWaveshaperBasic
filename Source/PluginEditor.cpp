@@ -17,8 +17,8 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     // editor's size to whatever you need it to be.
     setSize (400, 250);
     
-    lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
-    lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green.withAlpha(0.75f));
+    lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(1.0f));
+    lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green);
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
@@ -48,8 +48,6 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     labelPostGain.setText("Post (dB)", juce::dontSendNotification);
     sliderPostGain.setLookAndFeel(&lookAndFeel);
     labelPostGain.setLookAndFeel(&lookAndFeel);
-
-    
     
     labelWaveshapeType.attachToComponent(&waveshapeType, false);
     labelWaveshapeType.setColour(juce::Label::textColourId, juce::Colours::white);
@@ -101,7 +99,7 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
     labelPreGain.setBounds(sliderPreGain.getX() + 50, sliderPreGain.getY() - 10, 100, 25);
     
-    sliderPostGain.setBounds(((width / 3) * 2) - 30, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
+    sliderPostGain.setBounds(((width / 3) * 2) - 25, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
     labelPostGain.setBounds(sliderPostGain.getX() + 50, sliderPostGain.getY() - 10, 100, 25);
 
     
