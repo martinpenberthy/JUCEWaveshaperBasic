@@ -22,7 +22,6 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-   
 
     
     addAndMakeVisible(sliderPreGain);
@@ -61,6 +60,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     waveshapeType.onChange = [this]{modeMenuChanged();};
     waveshapeType.setSelectedId(1);
     waveshapeType.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
+    waveshapeType.setColour(juce::PopupMenu::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
     waveshapeType.setLookAndFeel(&lookAndFeel);
     
     

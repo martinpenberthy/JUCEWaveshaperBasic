@@ -27,6 +27,7 @@ public:
         return myFont;
     }
     
+
 private:
     juce::Font getCommonMenuFont()
     {
