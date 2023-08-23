@@ -17,15 +17,6 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     // editor's size to whatever you need it to be.
     setSize (400, 250);
     
-    lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(1.0f));
-    lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green);
-    lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-    lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
-    lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-    
-    lookAndFeel.setColour(juce::PopupMenu::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.25f));
-    lookAndFeel.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.25f));
-    
     addAndMakeVisible(sliderPreGain);
     addAndMakeVisible(labelPreGain);
     
@@ -37,6 +28,8 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPreGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     sliderPreGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 25);
     sliderPreGain.setDoubleClickReturnValue(true, 0.0f);
+    sliderPreGain.setSkewFactor(10.0f);
+    
     labelPreGain.setText("Pre (dB)", juce::dontSendNotification);
     sliderPreGain.setLookAndFeel(&lookAndFeel);
     labelPreGain.setLookAndFeel(&lookAndFeel);
@@ -45,20 +38,23 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPostGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 25);
     sliderPostGain.setDoubleClickReturnValue(true, 0.0f);
+    
+    
     labelPostGain.setText("Post (dB)", juce::dontSendNotification);
     sliderPostGain.setLookAndFeel(&lookAndFeel);
     labelPostGain.setLookAndFeel(&lookAndFeel);
     
     labelWaveshapeType.attachToComponent(&waveshapeType, false);
     labelWaveshapeType.setColour(juce::Label::textColourId, juce::Colours::white);
-    waveshapeType.addItem("Tanh", 1);
-    waveshapeType.addItem("myAmp", 2);
-    waveshapeType.addItem("x/abs(x)+1", 3);
-    waveshapeType.addItem("Atan", 4);
-    waveshapeType.addItem("HalfRect", 5);
-    waveshapeType.addItem("Amp1", 6);
+    waveshapeType.addItem("Fat", 1);
+    waveshapeType.addItem("Tight", 2);
+    waveshapeType.addItem("Classic", 3);
+    waveshapeType.addItem("Clear", 4);
+    waveshapeType.addItem("HardClip", 5);
+    waveshapeType.addItem("Sauce", 6);
     waveshapeType.onChange = [this]{modeMenuChanged();};
-    waveshapeType.setSelectedId(1);
+    waveshapeType.setJustificationType(juce::Justification::centred);
+    //waveshapeType.setSelectedId(1);
     //waveshapeType.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
     //waveshapeType.setColour(juce::PopupMenu::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
     waveshapeType.setLookAndFeel(&lookAndFeel);
