@@ -22,7 +22,9 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
-
+    
+    lookAndFeel.setColour(juce::PopupMenu::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.25f));
+    lookAndFeel.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.25f));
     
     addAndMakeVisible(sliderPreGain);
     addAndMakeVisible(labelPreGain);
@@ -59,8 +61,8 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     waveshapeType.addItem("Amp1", 6);
     waveshapeType.onChange = [this]{modeMenuChanged();};
     waveshapeType.setSelectedId(1);
-    waveshapeType.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
-    waveshapeType.setColour(juce::PopupMenu::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
+    //waveshapeType.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
+    //waveshapeType.setColour(juce::PopupMenu::backgroundColourId, juce::Colours::black.withAlpha(0.5f));
     waveshapeType.setLookAndFeel(&lookAndFeel);
     
     
