@@ -97,7 +97,7 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
     labelPreGain.setBounds(sliderPreGain.getX() + 50, sliderPreGain.getY() - 10, 100, 25);
     
-    sliderPostGain.setBounds(((width / 3) * 2) - 25, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
+    sliderPostGain.setBounds(((width / 3) * 2) - 29, (getHeight() / 2) - (knobSize / 2) + 20, knobSize, knobSize);
     labelPostGain.setBounds(sliderPostGain.getX() + 50, sliderPostGain.getY() - 10, 100, 25);
 
     
