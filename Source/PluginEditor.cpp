@@ -28,7 +28,7 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPreGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     sliderPreGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 25);
     sliderPreGain.setDoubleClickReturnValue(true, 0.0f);
-    sliderPreGain.setSkewFactor(10.0f);
+    sliderPreGain.setSkewFactor(5.0f);
     
     labelPreGain.setText("Pre (dB)", juce::dontSendNotification);
     sliderPreGain.setLookAndFeel(&lookAndFeel);
@@ -38,6 +38,8 @@ WaveshaperBasicAudioProcessorEditor::WaveshaperBasicAudioProcessorEditor (Wavesh
     sliderPostGain.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     sliderPostGain.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 25);
     sliderPostGain.setDoubleClickReturnValue(true, 0.0f);
+    sliderPostGain.setSkewFactor(0.5f);
+    
     
     
     labelPostGain.setText("Post (dB)", juce::dontSendNotification);
@@ -80,7 +82,7 @@ void WaveshaperBasicAudioProcessorEditor::paint (juce::Graphics& g)
     //g.fillAll(juce::Colour::fromRGB(30, 10, 70));
 
     juce::Rectangle<int> area (0, 0, getWidth(), getHeight());
-    juce::ColourGradient bgGradient = juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::whitesmoke, getWidth(), getHeight(), false);
+    juce::ColourGradient bgGradient = juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::lightgrey, getWidth(), getHeight(), false);
     g.setGradientFill(bgGradient);
     g.fillRect (area);
 }
@@ -99,7 +101,7 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     labelPostGain.setBounds(sliderPostGain.getX() + 50, sliderPostGain.getY() - 10, 100, 25);
 
     
-    waveshapeType.setBounds((getWidth()/2) - 50, 20, 100, 25);
+    waveshapeType.setBounds((getWidth()/2) - 40, 20, 100, 25);
 }
 
 void WaveshaperBasicAudioProcessorEditor::modeMenuChanged()

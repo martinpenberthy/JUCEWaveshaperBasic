@@ -255,8 +255,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveshaperBasicAudioProcesso
 {
     juce::AudioProcessorValueTreeState::ParameterLayout params;
     
-    params.add(std::make_unique<juce::AudioParameterFloat>("PREGAIN", "PreGain", 0.0f, 48.0f, 0.0f));
-    params.add(std::make_unique<juce::AudioParameterFloat>("POSTGAIN", "PostGain", -48.0f, 6.0f, 0.0f));
+    params.add(std::make_unique<juce::AudioParameterFloat>("PREGAIN", "PreGain", 0.0f, 36.0f, 0.0f));
+    params.add(std::make_unique<juce::AudioParameterFloat>("POSTGAIN", "PostGain", -48.0f, 0.0f, 0.0f));
 
     params.add(std::make_unique<juce::AudioParameterChoice>("TYPE", "Type",
                                                             juce::StringArray {"Tanh",

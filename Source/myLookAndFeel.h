@@ -15,7 +15,7 @@ public:
     myLookAndFeel()
     {
         setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(1.0f));
-        setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::green);
+        setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::white.withAlpha(1.0f));
         setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
         setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
         setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
