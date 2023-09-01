@@ -80,15 +80,15 @@ void WaveshaperBasicAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     //g.fillAll (juce::Colour::fromRGB(15, 16, 59));
     //g.fillAll(juce::Colour::fromRGB(30, 10, 70));
-    g.fillAll (juce::Colours::white);
+
     juce::Rectangle<int> area (0, 0, getWidth(), getHeight());
-    juce::ColourGradient bgGradient = juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::darkgrey, getWidth(), getHeight(), false);
-    bgGradient.multiplyOpacity(0.6);    
+    juce::ColourGradient bgGradient = juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::whitesmoke, getWidth(), getHeight(), false);
+    //bgGradient.multiplyOpacity(0.8);
     g.setGradientFill(bgGradient);
     g.fillRect (area);
     
     backgroundImage = juce::ImageCache::getFromMemory(BinaryData::_Logos_Final2_alpha_png, BinaryData::_Logos_Final2_alpha_pngSize);
-    g.drawImageWithin(backgroundImage, 0, 95, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
+    g.drawImageWithin(backgroundImage, 0, -100, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
 }
 
 void WaveshaperBasicAudioProcessorEditor::resized()
@@ -98,14 +98,14 @@ void WaveshaperBasicAudioProcessorEditor::resized()
     int knobSize = 150;
     int width = getWidth();
     
-    sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2), knobSize, knobSize);
+    sliderPreGain.setBounds((width / 3) - 115, (getHeight() / 2) - (knobSize / 2) + 40, knobSize, knobSize);
     labelPreGain.setBounds(sliderPreGain.getX() + 50, sliderPreGain.getY() - 10, 100, 25);
     
-    sliderPostGain.setBounds(((width / 3) * 2) - 29, (getHeight() / 2) - (knobSize / 2) , knobSize, knobSize);
+    sliderPostGain.setBounds(((width / 3) * 2) - 29, (getHeight() / 2) - (knobSize / 2) + 40, knobSize, knobSize);
     labelPostGain.setBounds(sliderPostGain.getX() + 50, sliderPostGain.getY() - 10, 100, 25);
 
     
-    waveshapeType.setBounds((getWidth()/2) - 40, 20, 100, 25);
+    waveshapeType.setBounds((getWidth()/2) - 40, 60, 100, 25);
 }
 
 void WaveshaperBasicAudioProcessorEditor::modeMenuChanged()
