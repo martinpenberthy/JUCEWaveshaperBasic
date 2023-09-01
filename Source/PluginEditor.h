@@ -39,6 +39,8 @@ private:
     juce::Label labelWaveshapeType;
     juce::ComboBox waveshapeType;
     
+    juce::Image backgroundImage;
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPostGain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> comboAttachmentWaveshapeType;
